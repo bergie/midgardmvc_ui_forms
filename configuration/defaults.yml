@@ -1,0 +1,9 @@
+form_fieldwidgets:
+    text:
+        description: Text input
+        field: text
+        widget: text
+    checkbox:
+        description: Checkbox
+        field: boolean
+        widget: checkbox

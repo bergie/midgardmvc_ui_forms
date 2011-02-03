@@ -1,0 +1,52 @@
+requires:
+    midgardmvc_helper_forms:
+        - {type: github, user: midgardproject, repository: midgardmvc_helper_forms, branch: master}
+routes:
+    form_create:
+        path: '/form/create/{$parent}'
+        controller: midgardmvc_ui_forms_controllers_form
+        action: create
+        template_aliases: 
+            content: muf-edit-form
+    form_read:
+        path: '/form/{$form}'
+        controller: midgardmvc_ui_forms_controllers_form
+        action: read
+        template_aliases: 
+            content: muf-show-form
+    form_update:
+        path: '/form/{$form}/update'
+        controller: midgardmvc_ui_forms_controllers_form
+        action: update
+        template_aliases: 
+            content: muf-edit-form
+    form_delete:
+        path: '/form/{$form}/delete'
+        controller: midgardmvc_ui_forms_controllers_form
+        action: delete
+        template_aliases: 
+            content: muf-delete-form
+    field_create:
+        path: '/form/{$form}/field'
+        controller: midgardmvc_ui_forms_controllers_field
+        action: create
+        template_aliases: 
+            content: muf-edit-field
+    field_read:
+        path: '/form/{$form}/field/{$field}'
+        controller: midgardmvc_ui_forms_controllers_field
+        action: read
+        template_aliases: 
+            content: muf-show-field
+    field_update:
+        path: '/form/{$form}/field/{$field}/update'
+        controller: midgardmvc_ui_forms_controllers_field
+        action: update
+        template_aliases: 
+            content: muf-edit-form
+    field_delete:
+        path: '/form/{$form}/field/{$field}/delete'
+        controller: midgardmvc_ui_forms_controllers_field
+        action: delete
+        template_aliases: 
+            content: muf-delete-field

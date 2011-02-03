@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema xmlns="http://www.midgard-project.org/repligard/1.4">
+    <type name="midgardmvc_ui_forms_form" table="midgardmvc_ui_forms_form">
+        <property name="id" type="unsigned integer" primaryfield="id" index="yes" />
+        <property name="up" type="unsigned integer" link="midgardmvc_ui_forms_form:id" upfield="up" />
+        <property name="parent" type="guid" parentfield="parent" />
+        <property name="title" type="string" />
+    </type>
+
+    <type name="midgardmvc_ui_forms_form_field" table="midgardmvc_ui_forms_form_field" parent="midgardmvc_ui_forms_form">
+        <property name="id" type="unsigned integer" primaryfield="id" index="yes" />
+        <property name="form" type="unsigned integer" link="midgardmvc_ui_forms_form:id" parentfield="form" />
+        <property name="field" type="string" />
+        <property name="widget" type="string" />
+        <property name="title" type="string" />
+        <property name="placeholder" type="string" />
+        <property name="required" type="boolean" />
+    </type>
+</Schema>
