@@ -3,7 +3,31 @@ form_fieldwidgets:
         description: Text input
         field: text
         widget: text
+    textarea:
+        description: Textarea
+        field: text
+        widget: textarea
     checkbox:
         description: Checkbox
         field: boolean
         widget: checkbox
+    date:
+        description: Date input
+        field: datetime
+        widget: date
+    email:
+        description: Email input
+        field: email
+        widget: email
+    url:
+        description: URL input
+        field: url
+        widget: url
+    integer:
+        description: Integer input
+        field: integer
+        widget: number
+    float:
+        description: Float input
+        field: float
+        widget: number
