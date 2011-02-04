@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema xmlns="http://www.midgard-project.org/repligard/1.4">
+    <type name="midgardmvc_ui_forms_form_instance" table="midgardmvc_ui_forms_form_instance" parent="midgardmvc_ui_forms_form">
+        <property name="id" type="unsigned integer" primaryfield="id" index="yes" />
+        <property name="form" type="unsigned integer" link="midgardmvc_ui_forms_form:id" parentfield="form" />
+        <property name="relatedobject" type="guid" index="yes" />
+        <property name="completed" type="datetime" index="yes" />
+    </type>
+
+    <type name="midgardmvc_ui_forms_form_instance_field" table="midgardmvc_ui_forms_form_instance_field_string" parent="midgardmvc_ui_forms_form_instance">
+        <property name="id" type="unsigned integer" primaryfield="id" index="yes" />
+        <property name="form" type="unsigned integer" link="midgardmvc_ui_forms_form_instance:id" parentfield="form" />
+        <property name="field" type="string" index="yes" />
+    </type>
+
+    <type name="midgardmvc_ui_forms_form_instance_field_string" extends="midgardmvc_ui_forms_form_instance_field">
+        <property name="value" type="string" />
+    </type>
+
+    <type name="midgardmvc_ui_forms_form_instance_field_boolean" table="midgardmvc_ui_forms_form_instance_field_boolean" copy="midgardmvc_ui_forms_form_instance_field">
+        <property name="value" type="boolean" />
+    </type>
+
+</Schema>
