@@ -32,28 +32,28 @@ class midgardmvc_ui_forms_store
         return true;
     }
 
-    public static function get_instance_class_for_field(midgardmvc_helper_forms_field $field)
+    public static function get_instance_property_for_field(midgardmvc_helper_forms_field $field)
     {
         switch (get_class($field))
         {
             case 'midgardmvc_helper_forms_field_text':
-                return 'midgardmvc_ui_forms_form_instance_field_string';
+                return 'stringvalue';
             case 'midgardmvc_helper_forms_field_boolean':
-                return 'midgardmvc_ui_forms_form_instance_field_boolean';
+                return 'booleanvalue';
         }
         return null;
     }
 
     public static function get_instance_for_field(midgardmvc_helper_forms_field $field, midgardmvc_ui_forms_form_instance $instance)
     {
-        $instance_class = self::get_instance_class_for_field($field);
-        if (is_null($instance_class))
+        $instance_property = self::get_instance_class_for_field($field);
+        if (is_null($instance_property))
         {
             return null;
         }
 
         // Fetch fields from the database
-        $storage = new midgard_query_storage($instance_class);
+        $storage = new midgard_query_storage('midgardmvc_ui_forms_form_instance_field');
         $q = new midgard_query_select($storage);
         $q->set_constraint
         (
@@ -77,7 +77,7 @@ class midgardmvc_ui_forms_store
         $list_of_field_instances = $q->list_objects();
         if (empty($list_of_field_instances))
         {
-            $field_instance = new $instance_class();
+            $field_instance = new midgardmvc_ui_forms_form_instance_field();
             $field_instance->form = $instance->id;
             $field_instance->field = $field->get_name();
             return $field_instance;
@@ -88,12 +88,18 @@ class midgardmvc_ui_forms_store
 
     public static function store_field(midgardmvc_helper_forms_field $field, $field_instance)
     {
-        if ($field->get_value() == $field_instance->value)
+        $instance_property = self::get_instance_class_for_field($field);
+        if (is_null($instance_property))
         {
             return true;
         }
 
-        $field_instance->value = $field->get_value();
+        if ($field->get_value() == $field_instance->$instance_property)
+        {
+            return true;
+        }
+
+        $field_instance->$instance_property = $field->get_value();
 
         if (!$field_instance->guid)
         {
