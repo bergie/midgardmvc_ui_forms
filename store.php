@@ -46,7 +46,7 @@ class midgardmvc_ui_forms_store
 
     public static function get_instance_for_field(midgardmvc_helper_forms_field $field, midgardmvc_ui_forms_form_instance $instance)
     {
-        $instance_property = self::get_instance_class_for_field($field);
+        $instance_property = self::get_instance_property_for_field($field);
         if (is_null($instance_property))
         {
             return null;
@@ -88,7 +88,7 @@ class midgardmvc_ui_forms_store
 
     public static function store_field(midgardmvc_helper_forms_field $field, $field_instance)
     {
-        $instance_property = self::get_instance_class_for_field($field);
+        $instance_property = self::get_instance_property_for_field($field);
         if (is_null($instance_property))
         {
             return true;
