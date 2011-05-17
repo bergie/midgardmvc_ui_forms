@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+
+"Project-Id-Version: midgardmvc_ui_forms\n"
+"Report-Msgid-Bugs-To:\n"
+"PO-Revision-Date:\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "title_create_form"
+msgstr "Create Form"
+
+msgid "title_update_form"
+msgstr "Update Form"
+
+msgid "title_create_field"
+msgstr "Create Field(s)"
+
+msgid "title_update_field"
+msgstr "Update Field(s)"
