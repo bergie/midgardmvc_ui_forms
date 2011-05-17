@@ -1,9 +1,27 @@
 <?php
 class midgardmvc_ui_forms_controllers_form extends midgardmvc_core_controllers_baseclasses_crud
 {
+    public function __construct(midgardmvc_core_request $request)
+    {
+        parent::__construct($request);
+
+        $this->mvc = midgardmvc_core::get_instance();
+
+        $this->mvc->i18n->set_translation_domain('midgardmvc_ui_forms');
+
+        $default_language = $this->mvc->configuration->default_language;
+
+        if (! isset($default_language))
+        {
+            $default_language = 'en_US';
+        }
+
+        $this->mvc->i18n->set_language($default_language, false);
+    }
+
     private function load_parent(array $args)
     {
-        try 
+        try
         {
             $this->parent = midgard_object_class::get_object_by_guid($args['parent']);
         }
@@ -17,7 +35,7 @@ class midgardmvc_ui_forms_controllers_form extends midgardmvc_core_controllers_b
     {
         midgardmvc_core::get_instance()->authorization->require_user();
 
-        try 
+        try
         {
             $this->object = new midgardmvc_ui_forms_form($args['form']);
         }
@@ -26,7 +44,7 @@ class midgardmvc_ui_forms_controllers_form extends midgardmvc_core_controllers_b
             throw new midgardmvc_exception_notfound("Form not found: " . $e->getMessage());
         }
     }
-    
+
     public function prepare_new_object(array $args)
     {
         midgardmvc_core::get_instance()->authorization->require_user();
@@ -87,4 +105,21 @@ class midgardmvc_ui_forms_controllers_form extends midgardmvc_core_controllers_b
         );
     }
 
+    /**
+     * Prepares stuff for creation
+     */
+    public function get_create(array $args)
+    {
+        parent::get_create($args);
+        $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_create_form');
+    }
+
+    /**
+     * Prepares stuff for creation
+     */
+    public function get_update(array $args)
+    {
+        parent::get_update($args);
+        $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_update_form');
+    }
 }
