@@ -1,9 +1,27 @@
 <?php
 class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_baseclasses_crud
 {
+    public function __construct(midgardmvc_core_request $request)
+    {
+        parent::__construct($request);
+
+        $this->mvc = midgardmvc_core::get_instance();
+
+        $this->mvc->i18n->set_translation_domain('midgardmvc_ui_forms');
+
+        $default_language = $this->mvc->configuration->default_language;
+
+        if (! isset($default_language))
+        {
+            $default_language = 'en_US';
+        }
+
+        $this->mvc->i18n->set_language($default_language, false);
+    }
+
     private function load_parent(array $args)
     {
-        try 
+        try
         {
             $this->parent = new midgardmvc_ui_forms_form($args['form']);
         }
@@ -19,7 +37,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
 
         $this->load_parent($args);
 
-        try 
+        try
         {
             $this->object = new midgardmvc_ui_forms_form_field($args['field']);
         }
@@ -33,7 +51,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
             throw new midgardmvc_exception_notfound("Field {$this->object->guid} does not belong to form {$this->parent->guid}");
         }
     }
-    
+
     public function prepare_new_object(array $args)
     {
         midgardmvc_core::get_instance()->authorization->require_user();
@@ -84,7 +102,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         $this->form->process_post();
 
         $this->object->title = $this->form->title->get_value();
-        
+
         $fieldwidget = $this->form->fieldwidget->get_value();
         if (isset(midgardmvc_core::get_instance()->configuration->form_fieldwidgets[$fieldwidget]))
         {
@@ -119,5 +137,23 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
             ),
             $this->request
         );
+    }
+
+   /**
+     * Prepares stuff for creation
+     */
+    public function get_create(array $args)
+    {
+        parent::get_create($args);
+        $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_create_field');
+    }
+
+    /**
+     * Prepares stuff for creation
+     */
+    public function get_update(array $args)
+    {
+        parent::get_update($args);
+        $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_update_field');
     }
 }

@@ -21,13 +21,12 @@ class midgardmvc_ui_forms_store
                 continue;
             }
 
-            if (!self::store_field($item, $field_instance))
+            if (! self::store_field($item, $field_instance))
             {
                 $transaction->rollback();
                 return false;
             }
         }
-
         $transaction->commit();
         return true;
     }
@@ -47,6 +46,7 @@ class midgardmvc_ui_forms_store
     public static function get_instance_for_field(midgardmvc_helper_forms_field $field, midgardmvc_ui_forms_form_instance $instance)
     {
         $instance_property = self::get_instance_property_for_field($field);
+
         if (is_null($instance_property))
         {
             return null;
@@ -55,11 +55,13 @@ class midgardmvc_ui_forms_store
         // Fetch fields from the database
         $storage = new midgard_query_storage('midgardmvc_ui_forms_form_instance_field');
         $q = new midgard_query_select($storage);
+        $q->toggle_readonly(false);
+
         $q->set_constraint
         (
             new midgard_query_constraint
             (
-                new midgard_query_property('form', $storage),
+                new midgard_query_property('form'),
                 '=',
                 new midgard_query_value($instance->id)
             )
@@ -68,7 +70,7 @@ class midgardmvc_ui_forms_store
         (
             new midgard_query_constraint
             (
-                new midgard_query_property('field', $storage),
+                new midgard_query_property('field'),
                 '=',
                 new midgard_query_value($field->get_name())
             )
@@ -101,10 +103,12 @@ class midgardmvc_ui_forms_store
 
         $field_instance->$instance_property = $field->get_value();
 
-        if (!$field_instance->guid)
+
+        if (! $field_instance->guid)
         {
             return $field_instance->create();
         }
+
         return $field_instance->update();
     }
 }

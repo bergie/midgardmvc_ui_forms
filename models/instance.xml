@@ -7,7 +7,7 @@
         <property name="completed" type="datetime" index="yes" />
     </type>
 
-    <type name="midgardmvc_ui_forms_form_instance_field" table="midgardmvc_ui_forms_form_instance_field" parent="midgardmvc_ui_forms_form_instance">
+    <type name="midgardmvc_ui_forms_form_instance_field" table="midgardmvc_ui_forms_form_instance_field" parent="midgardmvc_ui_forms_form_instance" metadata="false">
         <property name="id" type="unsigned integer" primaryfield="id" index="yes" />
         <property name="form" type="unsigned integer" link="midgardmvc_ui_forms_form_instance:id" parentfield="form" />
         <property name="field" type="string" index="yes" />
