@@ -1,2 +1,4 @@
-<div id="midgardmvc_ui_forms_form" tal:content="structure current_component/form">
+<h2 tal:condition="true: current_component/title">${current_component/title}</h2>
+
+<div class="edit_form" id="midgardmvc_ui_forms_form" tal:content="structure current_component/form">
 </div>
