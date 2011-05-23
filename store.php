@@ -57,7 +57,8 @@ class midgardmvc_ui_forms_store
         $q = new midgard_query_select($storage);
         $q->toggle_readonly(false);
 
-        $q->set_constraint
+        $qg = new midgard_query_constraint_group('AND');
+        $qg->add_constraint
         (
             new midgard_query_constraint
             (
@@ -66,7 +67,7 @@ class midgardmvc_ui_forms_store
                 new midgard_query_value($instance->id)
             )
         );
-        $q->set_constraint
+        $qg->add_constraint
         (
             new midgard_query_constraint
             (
@@ -75,6 +76,8 @@ class midgardmvc_ui_forms_store
                 new midgard_query_value($field->get_name())
             )
         );
+        $q->set_constraint($qg);
+
         $q->execute();
         $list_of_field_instances = $q->list_objects();
         if (empty($list_of_field_instances))
