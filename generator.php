@@ -99,5 +99,10 @@ class midgardmvc_ui_forms_generator
         $field = $form->add_field($db_field->guid, $db_field->field, $db_field->required);
         $widget = $field->set_widget($db_field->widget);
         $widget->set_label($db_field->title);
+
+        if ($db_field->classes)
+        {
+            $widget->set_css($db_field->classes);
+        }
     }
 }
