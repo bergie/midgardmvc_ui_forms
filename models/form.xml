@@ -15,5 +15,6 @@
         <property name="title" type="string" />
         <property name="placeholder" type="string" />
         <property name="required" type="boolean" />
+        <property name="classes" type="string" />
     </type>
 </Schema>

@@ -95,6 +95,11 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         $field->set_value($this->object->required);
         $widget = $field->set_widget('checkbox');
         $widget->set_label('Required');
+
+        $field = $this->form->add_field('classes', 'text');
+        $field->set_value($this->object->classes);
+        $widget = $field->set_widget('text');
+        $widget->set_label('Classes');
     }
 
     public function process_form()
@@ -111,6 +116,8 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         }
 
         $this->object->required = $this->form->required->get_value();
+
+        $this->object->classes = $this->form->classes->get_value();
     }
 
     public function get_url_read()
