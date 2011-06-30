@@ -146,7 +146,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         );
     }
 
-   /**
+    /**
      * Prepares stuff for creation
      */
     public function get_create(array $args)
@@ -163,4 +163,14 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         parent::get_update($args);
         $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_update_field');
     }
+
+    /**
+     * Prepares stuff for deletion
+     */
+    public function get_delete(array $args)
+    {
+        parent::get_delete($args);
+        $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_delete_field');
+    }
+
 }
