@@ -14,8 +14,20 @@ msgstr "Create Form"
 msgid "title_update_form"
 msgstr "Update Form"
 
+msgid "label_edit_form"
+msgstr "Edit ${title} form"
+
+msgid "title_delete_form"
+msgstr "Delete Form"
+
 msgid "title_create_field"
-msgstr "Create Field(s)"
+msgstr "Create Field"
 
 msgid "title_update_field"
-msgstr "Update Field(s)"
+msgstr "Update Field"
+
+msgid "title_edit_field"
+msgstr "Edit Field"
+
+msgid "title_delete_field"
+msgstr "Delete Field"
