@@ -1,6 +1,26 @@
 <?php
 class midgardmvc_ui_forms_store
 {
+    public static function load_form(midgardmvc_helper_forms_group $form, midgardmvc_ui_forms_form_instance $instance)
+    {
+        $items = $form->items;
+        foreach ($items as $key => $item)
+        {
+            if ($item instanceof midgardmvc_helper_forms_group)
+            {
+                // TODO: Add support for subforms
+                continue;
+            }
+            $field_instance = self::get_instance_for_field($item, $instance);
+            if (is_null($field_instance))
+            {
+                continue;
+            }
+
+            self::load_field($item, $field_instance);
+        }
+    }
+
     public static function store_form(midgardmvc_helper_forms_group $form, midgardmvc_ui_forms_form_instance $instance)
     {
         $transaction = new midgard_transaction();
@@ -89,6 +109,17 @@ class midgardmvc_ui_forms_store
         }
 
         return $list_of_field_instances[0];
+    }
+
+    public static function load_field(midgardmvc_helper_forms_field $field, $field_instance)
+    {
+        $instance_property = self::get_instance_property_for_field($field);
+        if (is_null($instance_property))
+        {
+            return true;
+        }
+
+        $field->set_value($field_instance->$instance_property);
     }
 
     public static function store_field(midgardmvc_helper_forms_field $field, $field_instance)
