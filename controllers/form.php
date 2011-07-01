@@ -68,7 +68,7 @@ class midgardmvc_ui_forms_controllers_form extends midgardmvc_core_controllers_b
         parent::get_read($args);
 
         // Load a readonly preview of the form
-        $this->data['form_preview'] = midgardmvc_ui_forms_generator::get_by_form($this->object);
+        $this->data['form_preview'] = midgardmvc_ui_forms_generator::get_by_form($this->object, true);
         $this->data['form_preview']->set_readonly(true);
 
         $this->data['field_create_url'] = midgardmvc_core::get_instance()->dispatcher->generate_url
