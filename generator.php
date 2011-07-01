@@ -14,18 +14,17 @@ class midgardmvc_ui_forms_generator
         return self::get_by_form($db_form);
     }
 
-    public static function get_by_form(midgardmvc_ui_forms_form $db_form)
+    public static function get_by_form(midgardmvc_ui_forms_form $db_form, $manage = false)
     {
         $form = midgardmvc_helper_forms::create($db_form->guid);
         $list_of_fields = self::list_fields($db_form);
 
-        $manage = false;
         $user = midgardmvc_core::get_instance()->authentication->get_user();
 
-        if (   $user
-            && $user->is_admin())
+        if (   ! $user
+            || ! $user->is_admin())
         {
-            $manage = true;
+            $manage = false;
         }
 
         foreach ($list_of_fields as $db_field)
