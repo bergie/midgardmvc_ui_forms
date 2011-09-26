@@ -117,6 +117,20 @@ class midgardmvc_ui_forms_generator
         $widget = $field->set_widget($db_field->widget);
         $widget->set_label($db_field->title);
 
+        if ($db_field->options)
+        {
+            $_options = explode(',', $db_field->options);
+            if (   is_array($_options)
+                && count($_options))
+            {
+                foreach($_options as $_option)
+                {
+                    $options[] = array('description' => trim($_option), 'value' => trim($_option));
+                }
+                $widget->set_options($options);
+            }
+        }
+
         if ($db_field->classes)
         {
             $widget->set_css($db_field->classes);
