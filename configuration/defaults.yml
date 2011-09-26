@@ -31,3 +31,8 @@ form_fieldwidgets:
         description: Float input
         field: float
         widget: number
+    radiobuttons:
+        description: Radio buttons
+        field: text
+        widget: radiobuttons
+
