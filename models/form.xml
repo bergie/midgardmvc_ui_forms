@@ -15,6 +15,11 @@
         <property name="title" type="string" />
         <property name="placeholder" type="string" />
         <property name="required" type="boolean" />
-        <property name="classes" type="string" />
+        <property name="classes" type="string">
+            <description>Space separated list of CSS classes.</description>
+        </property>
+        <property name="options" type="string">
+            <description>Comma separated list for options in radio buttons.</description>
+        </property>
     </type>
 </Schema>
