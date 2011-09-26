@@ -69,7 +69,6 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         $widget = $field->set_widget('text');
         $widget->set_label('Label');
 
-
         $field = $this->form->add_field('fieldwidget', 'text');
         $list_of_fieldoptions = array();
         $list_of_fieldwidgets = midgardmvc_core::get_instance()->configuration->form_fieldwidgets;
@@ -91,15 +90,22 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         $widget->set_label('Field');
         $widget->set_options($list_of_fieldoptions);
 
-        $field = $this->form->add_field('required', 'boolean');
-        $field->set_value($this->object->required);
-        $widget = $field->set_widget('checkbox');
-        $widget->set_label('Required');
+        $field = $this->form->add_field('options', 'text');
+        $field->set_value($this->object->options);
+        $widget = $field->set_widget('text');
+        $widget->set_label('Options');
+        $widget->set_title('comma separated list');
 
         $field = $this->form->add_field('classes', 'text');
         $field->set_value($this->object->classes);
         $widget = $field->set_widget('text');
-        $widget->set_label('Classes');
+        $widget->set_label('CSS classes');
+        $widget->set_title('space separated list');
+
+        $field = $this->form->add_field('required', 'boolean');
+        $field->set_value($this->object->required);
+        $widget = $field->set_widget('checkbox');
+        $widget->set_label('Required');
     }
 
     public function process_form()
@@ -118,6 +124,8 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
         $this->object->required = $this->form->required->get_value();
 
         $this->object->classes = $this->form->classes->get_value();
+
+        $this->object->options = $this->form->options->get_value();
     }
 
     public function get_url_read()
