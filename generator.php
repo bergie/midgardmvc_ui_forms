@@ -16,10 +16,14 @@ class midgardmvc_ui_forms_generator
 
     public static function get_by_form(midgardmvc_ui_forms_form $db_form, $manage = false)
     {
+        $mvc = midgardmvc_core::get_instance();
+        $component_name = 'midgardmvc_ui_forms';
+
         $form = midgardmvc_helper_forms::create($db_form->guid);
+
         $list_of_fields = self::list_fields($db_form);
 
-        $user = midgardmvc_core::get_instance()->authentication->get_user();
+        $user = $mvc->authentication->get_user();
 
         if (   ! $user
             || ! $user->is_admin())
