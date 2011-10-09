@@ -159,6 +159,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
      */
     public function get_create(array $args)
     {
+        midgardmvc_core::get_instance()->authorization->require_admin();
         parent::get_create($args);
         $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_create_field');
     }
@@ -168,6 +169,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
      */
     public function get_update(array $args)
     {
+        midgardmvc_core::get_instance()->authorization->require_admin();
         parent::get_update($args);
         $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_update_field');
     }
@@ -177,6 +179,7 @@ class midgardmvc_ui_forms_controllers_field extends midgardmvc_core_controllers_
      */
     public function get_delete(array $args)
     {
+        midgardmvc_core::get_instance()->authorization->require_admin();
         parent::get_delete($args);
         $this->data['title'] = midgardmvc_core::get_instance()->i18n->get('title_delete_field');
     }
