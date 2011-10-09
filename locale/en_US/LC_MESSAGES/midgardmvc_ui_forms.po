@@ -20,6 +20,9 @@ msgstr "Edit ${title} form"
 msgid "title_delete_form"
 msgstr "Delete Form"
 
+msgid "title_add_field"
+msgstr "Add Field"
+
 msgid "title_create_field"
 msgstr "Create Field"
 
@@ -31,3 +34,18 @@ msgstr "Edit Field"
 
 msgid "title_delete_field"
 msgstr "Delete Field"
+
+msgid "title_form_title"
+msgstr "Form Title"
+
+msgid "title_form_details"
+msgstr "Form Details"
+
+msgid "title_schedule_start"
+msgstr "Starting"
+
+msgid "title_schedule_end"
+msgstr "Ending"
+
+msgid "title_form_fields"
+msgstr "Form Fields"

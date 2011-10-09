@@ -16,10 +16,14 @@ class midgardmvc_ui_forms_generator
 
     public static function get_by_form(midgardmvc_ui_forms_form $db_form, $manage = false)
     {
+        $mvc = midgardmvc_core::get_instance();
+        $component_name = 'midgardmvc_ui_forms';
+
         $form = midgardmvc_helper_forms::create($db_form->guid);
+
         $list_of_fields = self::list_fields($db_form);
 
-        $user = midgardmvc_core::get_instance()->authentication->get_user();
+        $user = $mvc->authentication->get_user();
 
         if (   ! $user
             || ! $user->is_admin())
@@ -116,6 +120,20 @@ class midgardmvc_ui_forms_generator
         $field = $form->add_field($db_field->guid, $db_field->field, $db_field->required);
         $widget = $field->set_widget($db_field->widget);
         $widget->set_label($db_field->title);
+
+        if ($db_field->options)
+        {
+            $_options = explode(',', $db_field->options);
+            if (   is_array($_options)
+                && count($_options))
+            {
+                foreach($_options as $_option)
+                {
+                    $options[] = array('description' => trim($_option), 'value' => trim($_option));
+                }
+                $widget->set_options($options);
+            }
+        }
 
         if ($db_field->classes)
         {
